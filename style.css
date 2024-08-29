@@ -1,0 +1,67 @@
+body {
+    text-align: center;
+    background-color: rgba(240, 230, 140, 0.397);
+}
+
+form {
+    margin: 30px;
+}
+
+#ageInput {
+    padding: 0;
+    text-align: center;
+    height: 40px;
+    width: 70px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 60px;
+}
+
+#nameInput {
+    text-align: center;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#male {
+    margin-right: 10px
+}
+
+#female {
+    margin-right: 50px
+}
+
+.row {
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.col {
+    padding: 0;
+    border: solid;
+}
+
+h2 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.btn {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: 500;
+}
+
+img {
+    margin-top: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}
