@@ -3,11 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="Alireza Adeli"> <!--برای تعیین نویسنده متن برای موتور جستوجو-->
-    <meta name="description" content="Today's News"><!--برای تعیین محتوای متن برای موتور جستوجو-->
-    <meta name="keywords" content="news, live, tech"><!--برای تعیین کلیدواژه های متن برای موتور جستوجو-->
-    <meta name="robots" content="index, follow"><!-- برای مجاز کردن موتور جستوجو برای ایندکس کردن سایت و یا بررسی بقیه لینک های سایت-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--برای تعیین میزان رسپانسیو بودن سایت برای موتور جستوجو-->
+    <meta name="author" content="Alireza Adeli">
+    <meta name="description" content="Today's News">
+    <meta name="keywords" content="news, live, tech">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Student List V2</title>
 
@@ -25,7 +25,7 @@
         <input type="radio" name="gender" id="male" value="🔵Male" checked>
         <label for="female">Female</label>
         <input type="radio" name="gender" id="female" value="🔴Female">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
     </form>
     <div>
         <div class="row">
@@ -46,6 +46,33 @@
             </div>
             <div class="col col-1">
                 <h1>Delete</h1>
+            </div>
+        </div>
+    </div>
+    <div id="userList"></div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="text" id="editNameInput" placeholder="Type Name" required>
+                        <input type="number" min="1" max="100" id="editAgeInput" placeholder="Age" required><br/>
+                        <label for="editMale">Male</label>
+                        <input type="radio" name="editGender" id="editMale" value="🔵Male" checked>
+                        <label for="editFemale">Female</label>
+                        <input type="radio" name="editGender" id="editFemale" value="🔴Female">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveChangesBtn">Save changes</button>
+                </div>
             </div>
         </div>
     </div>

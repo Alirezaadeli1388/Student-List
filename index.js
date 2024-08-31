@@ -1,9 +1,50 @@
 var formEl = document.getElementById('form');
 var users = [];
+var editIndex = -1;
 
 function deleteUser(id) {
     users.splice(id, 1);
-    addToScreen(users); 
+    addToScreen(users);
+}
+
+function editUser(index) {
+    editIndex = index;
+    var user = users[index];
+    document.getElementById("editNameInput").value = user.name;
+    document.getElementById("editAgeInput").value = user.age;
+    var genderInput = document.getElementsByName("editGender");
+    for (var i = 0; i < genderInput.length; i++) {
+        if (genderInput[i].value === user.gender) {
+            genderInput[i].checked = true;
+            break;
+        }
+    }
+    var editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    editModal.show();
+}
+
+function saveChanges() {
+    var nameInputEl = document.getElementById("editNameInput");
+    var ageInput = document.getElementById("editAgeInput");
+    var genderInput = document.getElementsByName("editGender");
+
+    var selectedGender;
+    for (var i = 0; i < genderInput.length; i++) {
+        if (genderInput[i].checked) {
+            selectedGender = genderInput[i].value;
+            break;
+        }
+    }
+
+    users[editIndex] = {
+        name: nameInputEl.value,
+        age: ageInput.value,
+        gender: selectedGender
+    };
+
+    addToScreen(users);
+    var editModal = bootstrap.Modal.getInstance(document.getElementById('editModal'));
+    editModal.hide();
 }
 
 function addUser(event) {
@@ -29,13 +70,12 @@ function addUser(event) {
 
     users.push(user);
     addToScreen(users);
+    formEl.reset();
 }
 
 function addToScreen(users) {
-    var existingRows = document.querySelectorAll('.new');
-    existingRows.forEach(function (row) {
-        row.remove();
-    });
+    var userList = document.getElementById('userList');
+    userList.innerHTML = '';
 
     for (var i = 0; i < users.length; i++) {
         var user = users[i];
@@ -65,6 +105,11 @@ function addToScreen(users) {
         h2Gender.innerText = user.gender;
         var imgEdit = document.createElement('img');
         imgEdit.src = "./image/edit.png";
+        imgEdit.addEventListener('click', (function (index) {
+            return function () {
+                editUser(index);
+            };
+        })(i));
         var imgDelete = document.createElement('img');
         imgDelete.src = "./image/delete.png";
         imgDelete.addEventListener('click', (function (index) {
@@ -73,7 +118,7 @@ function addToScreen(users) {
             };
         })(i));
 
-        document.body.appendChild(row);
+        userList.appendChild(row);
         row.appendChild(numberCol);
         numberCol.appendChild(h2Number);
         row.appendChild(nameCol);
@@ -88,5 +133,7 @@ function addToScreen(users) {
         deleteCol.appendChild(imgDelete);
     }
 }
+
+document.getElementById('saveChangesBtn').addEventListener('click', saveChanges);
 
 formEl.addEventListener('submit', addUser);
